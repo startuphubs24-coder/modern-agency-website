@@ -1,6 +1,8 @@
 "use client"
 import { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
+
+export const dynamic = 'force-dynamic'
 import { supabase } from '@/lib/supabaseClient'
 import Link from 'next/link'
 import { LayoutDashboard, Calendar, Briefcase, MessageSquare, FileText, LogOut, Loader2, Image as ImageIcon, Users } from 'lucide-react'
