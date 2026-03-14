@@ -1,18 +1,16 @@
 "use client"
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { supabase } from '@/lib/supabaseClient'
 
-export default function HeroSection({ initialData }: { initialData?: { image_url: string, text_color?: string } | null }) {
-  const [bannerUrl, setBannerUrl] = useState<string | null>(initialData?.image_url || null)
-  const [textColor, setTextColor] = useState<string>(initialData?.text_color || '#1e3a8a')
+export default function HeroSection() {
+  const [bannerUrl, setBannerUrl] = useState<string | null>(null)
+  const [textColor, setTextColor] = useState<string>('#1e3a8a')
 
   useEffect(() => {
     const fetchActiveBanner = async () => {
-      // Small optimization: Only fetch if we don't have initial data OR to sync latest
       const { data } = await supabase
         .from('hero_banners')
         .select('image_url, text_color')
@@ -25,24 +23,17 @@ export default function HeroSection({ initialData }: { initialData?: { image_url
       }
     }
     
-    // We still fetch once to ensure client-side state is perfectly synced with latest DB (in case of ISR lag)
     fetchActiveBanner()
   }, [])
 
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
-      {/* Optimized Background Image Layer */}
+      {/* Dynamic Background Image Layer */}
       {bannerUrl && (
-        <div className="absolute inset-0 z-0 transition-opacity duration-700">
-          <Image 
-            src={bannerUrl} 
-            alt="Hero Background" 
-            fill
-            priority
-            quality={90}
-            className="object-cover object-center"
-          />
-        </div>
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-all duration-700"
+          style={{ backgroundImage: `url(${bannerUrl})` }}
+        />
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

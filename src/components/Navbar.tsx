@@ -17,116 +17,109 @@ export default function Navbar({ variant = 'light' }: { variant?: 'light' | 'dar
   ]
 
   useEffect(() => {
-    let ticking = false
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 20)
-          ticking = false
-        })
-        ticking = true
-      }
+      setScrolled(window.scrollY > 50)
     }
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const isDark = variant === 'dark' || scrolled
 
   return (
-    <div className={`fixed top-0 inset-x-0 w-full z-[100] flex justify-center transition-all duration-500 ${scrolled ? 'mt-0 px-0' : 'mt-4 sm:mt-6 px-4 sm:px-6 lg:px-8'} pointer-events-none`}>
+    <div className={`fixed top-0 inset-x-0 w-full z-[100] flex justify-center transition-all duration-500 ease-in-out ${scrolled ? 'py-0' : 'py-4 sm:py-6'} pointer-events-none`}>
       
-      {/* Floating Navbar */}
+      {/* Navbar Container */}
       <nav 
-        className={`pointer-events-auto w-full max-w-7xl flex items-center justify-between transition-all duration-500 ease-out px-5 sm:px-8 py-3 ${
+        className={`pointer-events-auto w-full max-w-7xl flex items-center justify-between transition-all duration-500 px-6 sm:px-10 py-3 ${
           scrolled 
-            ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-sm rounded-none max-w-none' 
-            : 'rounded-full'
+            ? 'bg-white/80 backdrop-blur-2xl border-b border-gray-200/50 shadow-[0_4px_30px_rgba(0,0,0,0.03)] rounded-none max-w-none' 
+            : 'bg-white/10 backdrop-blur-md border border-white/20 shadow-lg rounded-full mx-4 sm:mx-6 lg:mx-8'
         }`}
       >
         <div className="flex-shrink-0 flex items-center">
-          <Link href="/" className={`font-extrabold text-2xl tracking-tighter drop-shadow-sm group transition-all duration-300 ${isDark ? 'text-blue-950' : 'text-white'}`}>
-            Agency<span className="text-primary group-hover:animate-pulse transition-all">.</span>
+          <Link href="/" className={`font-extrabold text-2xl tracking-tighter group transition-colors duration-300 ${isDark ? 'text-blue-950' : 'text-white'}`}>
+            Agency<span className="text-primary group-hover:scale-125 inline-block transition-transform duration-300">.</span>
           </Link>
         </div>
         
-        {/* Right Side Items Container */}
-        <div className="flex items-center gap-2 md:gap-3">
-          {/* Desktop Navigation */}
-        <div className={`hidden lg:flex items-center gap-1.5 p-1 border rounded-full shadow-inner backdrop-blur-md ${isDark ? 'bg-blue-900/5 border-blue-900/10' : 'bg-white/20 border-white/30'}`}>
-          {navItems.map((item) => (
+        {/* Desktop Navigation Central Pill */}
+        <div className="hidden lg:flex items-center gap-1">
+          <div className={`flex items-center gap-1 p-1 border rounded-full transition-all duration-500 ${isDark ? 'bg-gray-900/5 border-gray-900/10' : 'bg-white/10 border-white/20'}`}>
+            {navItems.map((item) => (
+              <Link 
+                key={item.name}
+                href={item.href} 
+                className="group relative flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300"
+              >
+                {/* Hover Background Pill */}
+                <div className={`absolute inset-0 scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 rounded-full z-0 ${isDark ? 'bg-primary/10' : 'bg-white/20'}`} />
+                
+                <span className={`relative z-10 font-bold text-[11px] tracking-[0.15em] uppercase transition-colors ${isDark ? 'text-gray-600 group-hover:text-primary' : 'text-white/90 group-hover:text-white'}`}>
+                  {item.name}
+                </span>
+                <item.icon className={`relative z-10 w-3.5 h-3.5 transition-all duration-300 ${isDark ? 'text-gray-400 group-hover:text-primary' : 'text-white/40 group-hover:text-white'}`} />
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Right Action */}
+        <div className="flex items-center gap-4">
+          <div className="hidden md:block transition-all duration-500">
             <Link 
-              key={item.name}
-              href={item.href} 
-              className="group relative flex items-center justify-center gap-2 px-5 py-2.5 rounded-full overflow-hidden transition-all duration-300"
+              href="/#contact" 
+              className="group relative flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-white font-bold text-[11px] tracking-widest uppercase shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all duration-300 overflow-hidden active:scale-95"
             >
-              {/* Hover Background Pill Effect */}
-              <div className={`absolute inset-0 transition-all duration-300 rounded-full z-0 pointer-events-none border ${isDark ? 'bg-primary/0 group-hover:bg-primary/5 border-transparent group-hover:border-primary/20' : 'bg-white/0 group-hover:bg-white/90 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.8)] border-transparent group-hover:border-white/60'}`} />
-              
-              <span className={`relative z-10 font-bold text-xs tracking-widest uppercase transition-colors drop-shadow-md ${isDark ? 'text-blue-950/70 group-hover:text-primary' : 'text-white group-hover:text-primary'}`}>
-                {item.name}
-              </span>
-              <item.icon className={`relative z-10 w-4 h-4 transition-all duration-300 drop-shadow-sm ${isDark ? 'text-blue-950/40 group-hover:text-primary' : 'text-white/70 group-hover:text-primary group-hover:drop-shadow-[0_0_8px_rgba(236,72,153,0.5)]'}`} />
+               <span className="relative z-10">Consultation</span>
+               <PhoneCall className="relative z-10 w-3.5 h-3.5 group-hover:rotate-[15deg] transition-transform duration-300" />
             </Link>
-          ))}
-        </div>
+          </div>
 
-        {/* CTA Button Desktop */}
-        <div className={`hidden md:flex border p-1 rounded-full shadow-inner transition-all duration-300 ${isDark ? 'bg-blue-900/5 border-blue-900/10' : 'bg-white/20 border-white/30'}`}>
-          <Link 
-            href="/#contact" 
-            className="group relative flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-gradient-to-r from-primary to-violet-500 hover:from-primary/90 hover:to-violet-500/90 text-white font-bold text-xs tracking-widest uppercase shadow-lg hover:shadow-[0_0_20px_rgba(236,72,153,0.6)] transition-all duration-500 overflow-hidden"
-          >
-             <span className="relative z-10 drop-shadow-md">Consultation</span>
-             <PhoneCall className="relative z-10 w-4 h-4 drop-shadow-md group-hover:rotate-12 transition-transform" />
-          </Link>
-        </div>
-
-        {/* Mobile Menu Toggle Button */}
-        <div className="lg:hidden flex items-center">
-          <button 
-            onClick={() => setIsOpen(!isOpen)} 
-            className={`focus:outline-none p-2.5 rounded-full border backdrop-blur-md shadow-sm transition-all ${isDark ? 'text-blue-950 bg-blue-900/10 border-blue-900/20' : 'text-white bg-white/20 hover:bg-white/90 border-white/30'}`}
-          >
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
-
+          {/* Mobile Menu Toggle */}
+          <div className="lg:hidden">
+            <button 
+              onClick={() => setIsOpen(!isOpen)} 
+              className={`p-2 rounded-full border transition-all duration-300 ${isDark ? 'bg-gray-100 border-gray-200 text-gray-900' : 'bg-white/10 border-white/20 text-white hover:bg-white/20'}`}
+            >
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
       </nav>
       
-      {/* Mobile Menu Dropdown - Floating Glass Card */}
+      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className={`absolute left-4 right-4 sm:left-1/2 sm:-translate-x-1/2 w-[calc(100%-2rem)] sm:w-[400px] lg:hidden pointer-events-auto bg-white/80 backdrop-blur-[40px] border border-white/60 shadow-[0_20px_40px_rgba(0,0,0,0.15)] rounded-3xl overflow-hidden p-3 transition-all duration-300 ${scrolled ? 'top-[90%]' : 'top-[120%]'}`}
+            transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+            className={`absolute left-4 right-4 sm:left-auto sm:right-6 sm:w-[350px] lg:hidden pointer-events-auto bg-white/90 backdrop-blur-3xl border border-gray-200 shadow-2xl rounded-[2rem] overflow-hidden p-3 transition-all duration-500 ${scrolled ? 'top-16' : 'top-24'}`}
           >
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1">
               {navItems.map((item) => (
                 <Link 
                   key={item.name}
                   href={item.href} 
                   onClick={() => setIsOpen(false)}
-                  className="group flex items-center justify-between px-6 py-4 rounded-2xl transition-all duration-300 bg-white/0 hover:bg-white/80 hover:shadow-sm"
+                  className="group flex items-center justify-between px-6 py-4 rounded-2xl transition-all duration-300 hover:bg-primary/5"
                 >
-                  <span className="text-[15px] font-bold tracking-wide text-blue-950 group-hover:text-primary">{item.name}</span>
-                  <div className="bg-blue-50 group-hover:bg-pink-50 p-2 rounded-xl transition-colors">
-                    <item.icon className="w-5 h-5 text-blue-300 group-hover:text-primary transition-colors" />
+                  <span className="text-[14px] font-bold tracking-tight text-gray-900 group-hover:text-primary">{item.name}</span>
+                  <div className="bg-gray-50 group-hover:bg-primary/10 p-2 rounded-xl transition-all duration-300">
+                    <item.icon className="w-4 h-4 text-gray-400 group-hover:text-primary transition-colors" />
                   </div>
                 </Link>
               ))}
-              <div className="h-px w-full bg-blue-900/10 my-2" />
+              <div className="h-px bg-gray-100 my-2 mx-4" />
               <Link 
                 href="/#contact" 
                 onClick={() => setIsOpen(false)}
-                className="group flex items-center justify-center gap-3 px-6 py-4 text-[15px] font-bold tracking-wide uppercase text-white bg-gradient-to-r from-primary to-violet-500 rounded-2xl mt-1 shadow-lg hover:shadow-xl hover:shadow-primary/30 transition-all"
+                className="group flex items-center justify-center gap-3 px-6 py-4 text-[13px] font-bold tracking-widest uppercase text-white bg-primary rounded-2xl mt-1 shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all active:scale-[0.98]"
               >
                 <span>Book Consultation</span>
-                <PhoneCall className="w-5 h-5 group-hover:scale-110 group-hover:rotate-12 transition-transform" />
+                <PhoneCall className="w-4 h-4 group-hover:rotate-12 transition-transform" />
               </Link>
             </div>
           </motion.div>

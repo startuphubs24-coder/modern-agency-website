@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { Star } from 'lucide-react'
 
 interface Testimonial {
@@ -14,14 +13,21 @@ interface Testimonial {
   photo_url?: string
 }
 
-export default function TestimonialsSection({ initialTestimonials }: { initialTestimonials: Testimonial[] }) {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>(initialTestimonials)
+export default function TestimonialsSection() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([])
 
   useEffect(() => {
-    if (initialTestimonials.length > 0) {
-      setTestimonials(initialTestimonials)
+    async function fetchTestimonials() {
+      try {
+        const { data, error } = await supabase.from('testimonials').select('*').order('created_at', { ascending: false }).limit(6)
+        if (error) throw error
+        if (data) setTestimonials(data)
+      } catch (err: unknown) {
+        console.error("Error fetching testimonials:", (err as Error).message)
+      }
     }
-  }, [initialTestimonials])
+    fetchTestimonials()
+  }, [])
 
   return (
     <section id="testimonials" className="py-12 bg-gray-50 overflow-hidden">
@@ -55,7 +61,8 @@ export default function TestimonialsSection({ initialTestimonials }: { initialTe
               
               <div className="flex items-center">
                 {testimonial.photo_url ? (
-                  <Image src={testimonial.photo_url} alt={testimonial.client_name} width={48} height={48} className="h-12 w-12 rounded-full object-cover mr-4" />
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={testimonial.photo_url} alt={testimonial.client_name} className="h-12 w-12 rounded-full object-cover mr-4" />
                 ) : (
                   <div className="h-12 w-12 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-lg mr-4">
                     {testimonial.client_name?.charAt(0) || 'U'}
