@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import { format } from 'date-fns'
-import { Loader2 } from 'lucide-react'
+import { Loader2, Trash2, RefreshCcw } from 'lucide-react'
 import { Booking } from '@/lib/types'
 
 export default function ManageBookings() {
@@ -36,11 +36,29 @@ export default function ManageBookings() {
     }
   }
 
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this booking?")) return
+    
+    setLoading(true)
+    try {
+      const { error } = await supabase.from('bookings').delete().eq('id', id)
+      if (error) throw error
+      await fetchBookings()
+    } catch (err: unknown) {
+      alert("Error deleting booking: " + (err as Error).message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="bg-white shadow-sm rounded-xl border border-gray-100">
       <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-xl">
         <h3 className="text-lg leading-6 font-semibold text-gray-900">Manage Bookings</h3>
-        <button onClick={fetchBookings} className="text-sm text-primary hover:text-primary-hover font-medium">Refresh</button>
+        <button onClick={fetchBookings} className="text-sm text-primary hover:text-primary-hover font-medium flex items-center gap-1.5 transition-colors">
+          <RefreshCcw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+          Refresh
+        </button>
       </div>
 
       {loading ? (
@@ -73,20 +91,28 @@ export default function ManageBookings() {
                     {format(new Date(booking.created_at), 'PPPp')}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex flex-col gap-2 relative z-50 overflow-visible">
+                    <div className="flex items-center gap-3">
                       <select 
                         value={booking.status || 'New'} 
                         onChange={(e) => updateStatus(booking.id, e.target.value)}
-                        className={`text-xs font-semibold rounded-full px-3 py-1 border-0 ring-1 ring-inset ${
-                          booking.status === 'New' ? 'bg-green-50 text-green-700 ring-green-600/20' :
-                          booking.status === 'Contacted' ? 'bg-yellow-50 text-yellow-800 ring-yellow-600/20' :
-                          'bg-gray-50 text-gray-700 ring-gray-600/20'
+                        className={`text-xs font-semibold rounded-full px-3 py-1 border-0 ring-1 ring-inset cursor-pointer outline-none transition-all ${
+                          booking.status === 'New' ? 'bg-green-50 text-green-700 ring-green-600/20 hover:bg-green-100' :
+                          booking.status === 'Contacted' ? 'bg-yellow-50 text-yellow-800 ring-yellow-600/20 hover:bg-yellow-100' :
+                          'bg-gray-50 text-gray-700 ring-gray-600/20 hover:bg-gray-100'
                         }`}
                       >
                         <option value="New">New</option>
                         <option value="Contacted">Contacted</option>
                         <option value="Closed">Closed</option>
                       </select>
+
+                      <button 
+                        onClick={() => handleDelete(booking.id)}
+                        className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                        title="Delete Booking"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
                     </div>
                   </td>
                 </tr>

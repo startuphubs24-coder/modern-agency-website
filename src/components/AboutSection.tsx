@@ -5,11 +5,9 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-12 relative overflow-hidden bg-gradient-to-br from-indigo-50/80 via-white to-pink-50/80">
-      {/* 3D Floating Abstract Blobs Background - Soft Pastel Version */}
-      
-      {/* Ambient Lighting Gradient - Simplified for performance */}
-      <div className="absolute inset-0 bg-white/60 pointer-events-none z-0" />
+    <section id="about" className="py-24 relative overflow-hidden bg-gradient-to-br from-indigo-200/50 via-white to-rose-200/50">
+      {/* Ambient Lighting Gradient */}
+      <div className="absolute inset-0 bg-white/20 pointer-events-none z-0" />
 
       {/* Optimized Background Blobs - Reduced number and simplified filters */}
       {/* Blob 1: Soft Indigo - Using transform-gpu for hardware acceleration */}
@@ -19,7 +17,7 @@ export default function AboutSection() {
           y: [0, 30, 0],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[-10%] left-[-5%] w-[35rem] h-[35rem] bg-indigo-200/40 rounded-full z-0 pointer-events-none blur-[100px] transform-gpu"
+        className="absolute top-[-10%] left-[-5%] w-[40rem] h-[40rem] bg-indigo-300/40 rounded-full z-0 pointer-events-none blur-[120px] transform-gpu"
         style={{ willChange: "transform" }}
       />
 
@@ -30,7 +28,7 @@ export default function AboutSection() {
           y: [0, 40, 0],
         }}
         transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-[-10%] right-[-5%] w-[40rem] h-[40rem] bg-rose-200/40 rounded-full z-0 pointer-events-none blur-[100px] transform-gpu"
+        className="absolute bottom-[-10%] right-[-5%] w-[45rem] h-[45rem] bg-rose-300/40 rounded-full z-0 pointer-events-none blur-[120px] transform-gpu"
         style={{ willChange: "transform" }}
       />
 

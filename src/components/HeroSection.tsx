@@ -12,15 +12,37 @@ export default function HeroSection() {
 
   useEffect(() => {
     const fetchActiveBanner = async () => {
-      const { data } = await supabase
-        .from('hero_banners')
-        .select('image_url, text_color')
-        .eq('is_active', true)
-        .single()
-      
-      if (data && data.image_url) {
-        setBannerUrl(data.image_url)
-        if (data.text_color) setTextColor(data.text_color)
+      try {
+        // First try to get the active banner
+        const { data, error } = await supabase
+          .from('hero_banners')
+          .select('image_url, text_color')
+          .eq('is_active', true)
+          .maybeSingle()
+        
+        if (error) {
+          console.error('Error fetching active banner:', error)
+        }
+
+        if (data && data.image_url) {
+          setBannerUrl(data.image_url)
+          if (data.text_color) setTextColor(data.text_color)
+        } else {
+          // Fallback: If no active banner, get the most recent one
+          const { data: recentData } = await supabase
+            .from('hero_banners')
+            .select('image_url, text_color')
+            .order('created_at', { ascending: false })
+            .limit(1)
+            .maybeSingle()
+          
+          if (recentData && recentData.image_url) {
+            setBannerUrl(recentData.image_url)
+            if (recentData.text_color) setTextColor(recentData.text_color)
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch hero banner:', err)
       }
     }
     
@@ -39,6 +61,7 @@ export default function HeroSection() {
             priority
             className="object-cover object-center"
             quality={85}
+            unoptimized
           />
         </div>
       )}

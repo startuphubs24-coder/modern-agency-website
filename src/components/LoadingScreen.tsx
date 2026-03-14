@@ -5,13 +5,24 @@ import { Sparkles } from 'lucide-react'
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true)
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    // Artificial delay to show the beautiful loading screen
     const timer = setTimeout(() => {
       setIsLoading(false)
     }, 2800)
-    return () => clearTimeout(timer)
+
+    const interval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) return 100
+        return prev + Math.random() * 15
+      })
+    }, 150)
+
+    return () => {
+      clearTimeout(timer)
+      clearInterval(interval)
+    }
   }, [])
 
   useEffect(() => {
@@ -36,58 +47,99 @@ export default function LoadingScreen() {
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
           {/* Ambient colored glowing orbs */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-pink-300/20 rounded-full blur-[100px] pointer-events-none" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-300/20 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-[120px] pointer-events-none animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-red-50/30 rounded-full blur-[120px] pointer-events-none animate-pulse" />
 
           <motion.div
-            initial={{ scale: 0.8, opacity: 0, filter: "blur(10px)" }}
+            initial={{ scale: 0.9, opacity: 0, filter: "blur(10px)" }}
             animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="relative flex flex-col items-center gap-8"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative flex flex-col items-center gap-10"
           >
-            {/* Spinning concentric rings with center icon */}
-            <div className="relative flex items-center justify-center w-28 h-28">
-              <motion.div 
-                animate={{ rotate: 360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 rounded-full border border-dashed border-primary/50"
-              />
-              <motion.div 
-                animate={{ rotate: -360 }}
-                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-3 rounded-full border-b-2 border-r-2 border-blue-400 opacity-60"
-              />
-              <motion.div 
-                animate={{ rotate: 360 }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute inset-6 rounded-full border-t-2 border-l-2 border-pink-500 opacity-80"
-              />
-              
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Sparkles className="w-8 h-8 text-primary drop-shadow-[0_0_15px_rgba(236,72,153,0.8)]" />
+            {/* Logo Image */}
+            <div className="relative flex items-center justify-center w-48 h-48">
+              <div className="relative z-10 w-full h-full">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/assets/logo.png" alt="Startup Hub Logo" className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(37,99,235,0.4)]" />
               </div>
-            </div>
-            
-            {/* Animated Logo Text reveal */}
-            <div className="overflow-hidden flex flex-col items-center justify-center">
-              <motion.h1 
-                initial={{ y: "100%", opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
-                className="text-5xl font-extrabold text-blue-950 tracking-tighter"
-              >
-                Agency<span className="text-primary inline-block">.</span>
-              </motion.h1>
-            </div>
-            
-            {/* Expanding loading progress line */}
-            <div className="relative w-48 h-1 rounded-full overflow-hidden bg-gray-100">
+              
+              {/* Outer glow rings */}
               <motion.div 
-                initial={{ x: "-100%" }}
-                animate={{ x: "0%" }}
-                transition={{ delay: 0.8, duration: 2, ease: "easeInOut" }}
-                className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-blue-400 via-primary to-pink-500"
+                animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute inset-0 bg-primary/20 rounded-full blur-3xl"
               />
+            </div>
+            
+            {/* Animated Logo Text - Letter by Letter Reveal */}
+            <div className="flex flex-col items-center gap-6">
+              <div className="flex items-center gap-2">
+                <div className="flex">
+                  {"Startup".split("").map((char, i) => (
+                    <motion.span
+                      key={`s-${i}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ 
+                        delay: 0.1 + (i * 0.05),
+                        duration: 0.5,
+                        ease: [0.22, 1, 0.36, 1]
+                      }}
+                      className="text-6xl font-extrabold text-[#001D4A] tracking-tighter"
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </div>
+                <div className="flex ml-1">
+                  {"Hub".split("").map((char, i) => (
+                    <motion.span
+                      key={`h-${i}`}
+                      initial={{ opacity: 0, scale: 0.5, y: 15 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ 
+                        delay: 0.5 + (i * 0.08),
+                        duration: 0.5,
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 15
+                      }}
+                      className="text-6xl font-extrabold text-red-600 tracking-tighter"
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Futuristic Progress Bar */}
+              <div className="relative w-72 flex flex-col items-center gap-3">
+                <div className="w-full h-[6px] bg-gray-100 rounded-full overflow-hidden border border-gray-200/50 relative">
+                  <motion.div 
+                    initial={{ width: "0%" }}
+                    animate={{ width: `${Math.min(progress, 100)}%` }}
+                    transition={{ type: "spring", stiffness: 50, damping: 20 }}
+                    className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-600 via-primary to-red-500 rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)]"
+                  >
+                    {/* Animated shine effect */}
+                    <motion.div 
+                      animate={{ x: ["-100%", "200%"] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                      className="absolute inset-0 w-20 bg-white/30 skew-x-[-20deg] blur-sm"
+                    />
+                  </motion.div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <motion.span 
+                    className="text-xs font-mono font-bold text-gray-400 tracking-widest uppercase"
+                  >
+                    System Initializing
+                  </motion.span>
+                  <span className="text-xs font-mono font-bold text-blue-600 min-w-[3ch]">
+                    {Math.floor(Math.min(progress, 100))}%
+                  </span>
+                </div>
+              </div>
             </div>
           </motion.div>
         </motion.div>

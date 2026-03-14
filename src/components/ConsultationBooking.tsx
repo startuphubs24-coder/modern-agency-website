@@ -67,20 +67,20 @@ export default function ConsultationBooking() {
   }
 
   return (
-    <section id="contact" className="relative py-32 overflow-hidden bg-gray-50 flex items-center justify-center min-h-[70vh]">
+    <section id="contact" className="relative py-32 overflow-hidden bg-gradient-to-br from-blue-100/60 via-white to-rose-100/60 flex items-center justify-center min-h-[70vh]">
       {/* Light gradient base background */}
-      <div className="absolute inset-0 bg-white" />
+      <div className="absolute inset-0 bg-white/20" />
 
       {/* Optimized Ambient Spheres - Reduced and simplified */}
       <motion.div 
         animate={{ y: [0, -20, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-10 left-1/4 w-[20rem] h-[20rem] bg-sky-100 rounded-full blur-[80px] pointer-events-none transform-gpu" 
+        className="absolute top-10 left-1/4 w-[25rem] h-[25rem] bg-sky-200/50 rounded-full blur-[100px] pointer-events-none transform-gpu" 
       />
       <motion.div 
         animate={{ y: [0, 20, 0] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute bottom-10 right-1/4 w-[25rem] h-[25rem] bg-rose-100 rounded-full blur-[80px] pointer-events-none transform-gpu" 
+        className="absolute bottom-10 right-1/4 w-[30rem] h-[30rem] bg-rose-200/50 rounded-full blur-[100px] pointer-events-none transform-gpu" 
       />
 
       <div className="relative z-10 w-full" style={{ perspective: 1500 }}>

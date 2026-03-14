@@ -6,10 +6,14 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="col-span-1 md:col-span-1">
-            <Link href="/" className="font-bold text-2xl tracking-tight text-gray-900">
-              Agency<span className="text-primary">.</span>
+            <Link href="/" className="group flex items-center gap-2">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/assets/logo.png" alt="Startup Hub" className="h-9 w-auto" />
+              <span className="font-extrabold text-2xl tracking-tighter text-gray-900">
+                Startup<span className="text-red-600">Hub</span>
+              </span>
             </Link>
             <p className="mt-4 text-gray-500 text-sm">
               Helping businesses scale intelligently through modern websites, design, and growth marketing.
@@ -23,14 +27,6 @@ export default function Footer() {
               <li><Link href="/#services" className="text-base text-gray-500 hover:text-gray-900">Services</Link></li>
               <li><Link href="/#portfolio" className="text-base text-gray-500 hover:text-gray-900">Portfolio</Link></li>
               <li><Link href="/blog" className="text-base text-gray-500 hover:text-gray-900">Blog</Link></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal</h3>
-            <ul className="mt-4 space-y-3">
-              <li><Link href="#" className="text-base text-gray-500 hover:text-gray-900">Privacy Policy</Link></li>
-              <li><Link href="#" className="text-base text-gray-500 hover:text-gray-900">Terms of Service</Link></li>
             </ul>
           </div>
           
@@ -52,7 +48,7 @@ export default function Footer() {
         
         <div className="mt-12 border-t border-gray-100 pt-8">
           <p className="text-base text-gray-400 xl:text-center">
-            &copy; {new Date().getFullYear()} Digital Growth Agency. All rights reserved.
+            &copy; {new Date().getFullYear()} Digital Startup Hub. All rights reserved.
           </p>
         </div>
       </div>

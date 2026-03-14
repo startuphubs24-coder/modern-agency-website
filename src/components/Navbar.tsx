@@ -39,8 +39,17 @@ export default function Navbar({ variant = 'light' }: { variant?: 'light' | 'dar
         }`}
       >
         <div className="flex-shrink-0 flex items-center">
-          <Link href="/" className={`font-extrabold text-2xl tracking-tighter group transition-colors duration-300 ${isDark ? 'text-blue-950' : 'text-white'}`}>
-            Agency<span className="text-primary group-hover:scale-125 inline-block transition-transform duration-300">.</span>
+          <Link href="/" className="group flex items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src="/assets/logo.png" 
+              alt="Startup Hub Logo" 
+              className="h-9 w-auto group-hover:scale-110 transition-transform duration-300"
+            />
+            <span className="font-extrabold text-xl sm:text-2xl tracking-tighter transition-colors duration-300 flex items-center">
+              <span className={isDark ? 'text-blue-950' : 'text-white'}>Startup</span>
+              <span className="text-red-600">Hub</span>
+            </span>
           </Link>
         </div>
         

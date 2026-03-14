@@ -62,11 +62,11 @@ export default function ServicesSection() {
   }, [selectedCategory])
 
   return (
-    <section id="services" className="py-12 bg-gray-50 relative overflow-hidden">
+    <section id="services" className="py-24 bg-gradient-to-b from-blue-50/50 via-blue-100/40 to-indigo-50/50 relative overflow-hidden">
       {/* Ambient glowing orbs for glassmorphism effect */}
       {/* Optimized ambient glowing orbs for performance */}
-      <div className="absolute top-20 -left-10 w-[20rem] h-[20rem] bg-blue-400/10 rounded-full blur-3xl opacity-70 pointer-events-none transform-gpu" />
-      <div className="absolute bottom-10 -right-20 w-[25rem] h-[25rem] bg-indigo-400/10 rounded-full blur-3xl opacity-70 pointer-events-none transform-gpu" />
+      <div className="absolute top-20 -left-10 w-[25rem] h-[25rem] bg-blue-500/15 rounded-full blur-3xl opacity-80 pointer-events-none transform-gpu" />
+      <div className="absolute bottom-10 -right-20 w-[30rem] h-[30rem] bg-indigo-500/15 rounded-full blur-3xl opacity-80 pointer-events-none transform-gpu" />
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="text-center max-w-3xl mx-auto mb-12">

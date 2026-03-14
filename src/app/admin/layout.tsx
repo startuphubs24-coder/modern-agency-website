@@ -71,8 +71,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Sidebar */}
       <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
         <div className="h-16 flex items-center px-6 border-b border-gray-200">
-          <Link href="/" className="font-bold text-xl tracking-tight text-gray-900">
-            Agency<span className="text-primary">Admin</span>
+          <Link href="/" className="flex items-center gap-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/assets/logo.png" alt="Startup Hub" className="h-8 w-auto" />
+            <span className="font-bold text-lg tracking-tight text-gray-900 ml-1">Admin</span>
           </Link>
         </div>
         

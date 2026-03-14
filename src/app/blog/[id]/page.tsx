@@ -59,14 +59,8 @@ export default function BlogPostPage() {
         />
       </div>
 
-      <style jsx global>{`
-        .blog-nav .text-white { color: #1e3a8a !important; }
-        .blog-nav .text-white\\/70 { color: rgba(30, 58, 138, 0.7) !important; }
-        .blog-nav .bg-white\\/20 { background-color: rgba(30, 58, 138, 0.05) !important; border-color: rgba(30, 58, 138, 0.1) !important; }
-      `}</style>
-      
-      <div className="blog-nav relative z-50">
-        <Navbar />
+      <div className="relative z-50">
+        <Navbar variant="dark" />
       </div>
       
       <div className="relative z-10 flex-1 pt-40 pb-24">

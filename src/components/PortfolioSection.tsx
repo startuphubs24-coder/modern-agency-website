@@ -27,7 +27,7 @@ export default function PortfolioSection() {
   }
 
   return (
-    <section id="portfolio" className="pt-28 pb-20 md:pt-40 md:pb-24 overflow-hidden relative bg-white">
+    <section id="portfolio" className="pt-28 pb-20 md:pt-40 md:pb-24 overflow-hidden relative bg-gradient-to-b from-white via-indigo-100/30 to-white">
       {/* Scroll Animated Layered Curved Shape */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
         <svg 
@@ -58,8 +58,8 @@ export default function PortfolioSection() {
       <div className="absolute inset-0 z-0 bg-white pointer-events-none" />
       
       {/* Optimized ambient glowing abstract colors */}
-      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-purple-100/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/4 pointer-events-none transform-gpu" />
-      <div className="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-orange-100/50 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/4 pointer-events-none transform-gpu" />
+      <div className="absolute top-0 right-0 w-[45rem] h-[45rem] bg-purple-200/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 pointer-events-none transform-gpu" />
+      <div className="absolute bottom-0 left-0 w-[45rem] h-[45rem] bg-orange-200/40 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none transform-gpu" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12 relative z-10">
@@ -154,6 +154,7 @@ export default function PortfolioSection() {
                           fill
                           className={`object-cover transition-transform duration-700 ${isCenter ? 'group-hover:scale-105' : ''}`}
                           sizes="(max-width: 768px) 100vw, 480px"
+                          unoptimized
                         />
                       ) : (
                         <div className="absolute inset-0 flex items-center justify-center text-gray-400 font-medium">No Image</div>

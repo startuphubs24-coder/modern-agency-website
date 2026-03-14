@@ -32,9 +32,11 @@ export default function AdminLogin() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl border border-gray-100">
-        <div>
-          <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900">
-            Agency<span className="text-primary">Admin</span>
+        <div className="flex flex-col items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/assets/logo.png" alt="Startup Hub" className="h-12 w-auto mb-2" />
+          <h2 className="text-center text-2xl font-extrabold text-gray-900">
+            Admin Dashboard
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Sign in to access your dashboard

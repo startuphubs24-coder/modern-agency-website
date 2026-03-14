@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Digital Growth Agency",
+  title: "Startup Hub",
   description: "Websites, marketing, automation, and analytics — everything you need to scale online.",
 };
 
@@ -19,15 +19,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single+Ink:wght@100..900&family=Tektur:wght@400..900&display=swap" rel="stylesheet" />
       </head>
-      <body className={`${inter.variable} font-sans antialiased`}>
-        <LoadingScreen />
-        {children}
+      <body className="antialiased" suppressHydrationWarning={true}>
+        <div className={`${inter.variable} font-sans`}>
+          <LoadingScreen />
+          {children}
+        </div>
       </body>
     </html>
   );
