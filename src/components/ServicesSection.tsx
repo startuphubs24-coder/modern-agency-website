@@ -63,10 +63,9 @@ export default function ServicesSection() {
 
   return (
     <section id="services" className="py-12 bg-gray-50 relative overflow-hidden">
-      {/* Ambient glowing orbs for glassmorphism effect */}
-      <div className="absolute top-20 -left-10 w-[30rem] h-[30rem] bg-blue-400/20 rounded-full blur-3xl mix-blend-multiply opacity-70 pointer-events-none" />
-      <div className="absolute bottom-10 -right-20 w-[35rem] h-[35rem] bg-indigo-400/20 rounded-full blur-3xl mix-blend-multiply opacity-70 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[20rem] bg-cyan-200/20 rounded-full blur-3xl mix-blend-multiply opacity-50 pointer-events-none" />
+      {/* Ambient glowing orbs for glassmorphism effect - Optimized blur */}
+      <div className="absolute top-20 -left-10 w-[20rem] h-[20rem] bg-blue-400/10 rounded-full blur-2xl mix-blend-multiply opacity-70 pointer-events-none" />
+      <div className="absolute bottom-10 -right-20 w-[25rem] h-[25rem] bg-indigo-400/10 rounded-full blur-2xl mix-blend-multiply opacity-70 pointer-events-none" />
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="text-center max-w-3xl mx-auto mb-12">
@@ -95,7 +94,7 @@ export default function ServicesSection() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6, type: "spring", stiffness: 100 }}
               onClick={() => setSelectedCategory(index)}
-              className="group relative w-full flex items-center p-3 pr-4 xl:pr-6 rounded-full bg-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(31,38,135,0.07)] cursor-pointer hover:shadow-[0_8px_40px_rgba(31,38,135,0.15)] hover:-translate-y-1 hover:bg-white/60 transition-all duration-300 overflow-hidden"
+              className="group relative w-full flex items-center p-3 pr-4 xl:pr-6 rounded-full bg-white/40 backdrop-blur-md border border-white/60 shadow-[0_8px_32px_rgba(31,38,135,0.07)] cursor-pointer hover:shadow-[0_8px_40px_rgba(31,38,135,0.15)] hover:-translate-y-1 hover:bg-white/60 transition-all duration-300 overflow-hidden"
             >
               {/* Internal subtle glow on hover */}
               <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -136,11 +135,11 @@ export default function ServicesSection() {
                animate={{ opacity: 1, scale: 1, rotateY: 0, rotateX: 0, y: 0 }}
                exit={{ opacity: 0, scale: 0.8, rotateY: 15, rotateX: -10, y: 40 }}
                transition={{ type: "spring", damping: 25, stiffness: 300 }}
-               className="relative w-full max-w-5xl bg-white/60 backdrop-blur-2xl shadow-[0_30px_80px_-15px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.8)] border border-white/80 rounded-[2.5rem] overflow-hidden flex flex-col"
+               className="relative w-full max-w-5xl bg-white/70 backdrop-blur-xl shadow-[0_30px_80px_-15px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.8)] border border-white/80 rounded-[2.5rem] overflow-hidden flex flex-col"
             >
               {/* Decorative Glowing Elements inside the modal window */}
-              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-cyan-400/20 to-transparent rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none" />
+              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-[40px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-cyan-400/20 to-transparent rounded-full blur-[40px] translate-y-1/3 -translate-x-1/3 pointer-events-none" />
 
               {/* Header */}
               <div className="px-6 py-8 sm:px-10 relative shrink-0 border-b border-white/30">

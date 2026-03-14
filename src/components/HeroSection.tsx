@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { supabase } from '@/lib/supabaseClient'
@@ -28,12 +29,18 @@ export default function HeroSection() {
 
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
-      {/* Dynamic Background Image Layer */}
+      {/* Optimized Background Image Layer */}
       {bannerUrl && (
-        <div 
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-all duration-700"
-          style={{ backgroundImage: `url(${bannerUrl})` }}
-        />
+        <div className="absolute inset-0 z-0 transition-opacity duration-700">
+          <Image 
+            src={bannerUrl} 
+            alt="Hero Background" 
+            fill
+            priority
+            quality={90}
+            className="object-cover object-center"
+          />
+        </div>
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

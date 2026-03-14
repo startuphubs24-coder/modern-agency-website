@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import { ExternalLink, ChevronRight, ChevronLeft } from 'lucide-react'
 import { Project } from '@/lib/types'
 
@@ -148,23 +149,24 @@ export default function PortfolioSection() {
                     {/* Image Area - Instagram style */}
                     <div className="relative aspect-[4/4] sm:aspect-[4/3] w-full bg-gray-100 overflow-hidden group">
                       {project.image_url ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img 
+                        <Image 
                           src={project.image_url} 
                           alt={project.title} 
-                          className={`w-full h-full object-cover transition-transform duration-700 ${isCenter ? 'group-hover:scale-105' : ''}`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 480px"
+                          className={`object-cover transition-transform duration-700 ${isCenter ? 'group-hover:scale-105' : ''}`}
                         />
                       ) : (
                         <div className="absolute inset-0 flex items-center justify-center text-gray-400 font-medium">No Image</div>
                       )}
                       
                       {/* Industry Badge */}
-                      <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-primary shadow-sm tracking-wide uppercase">
+                      <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-primary shadow-sm tracking-wide uppercase z-10">
                         {project.industry}
                       </div>
                       
                       {/* Overlay gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
                     </div>
 
                     {/* Content Area */}

@@ -10,8 +10,32 @@
   --color-accent: #3B82F6;
 }
 
+/* Performance Optimizations */
+* {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
+  /* Hardware acceleration hint */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimize Large Sections */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1000px;
 }
 
 :root {

@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { Star } from 'lucide-react'
 
 interface Testimonial {
@@ -61,8 +62,7 @@ export default function TestimonialsSection() {
               
               <div className="flex items-center">
                 {testimonial.photo_url ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={testimonial.photo_url} alt={testimonial.client_name} className="h-12 w-12 rounded-full object-cover mr-4" />
+                  <Image src={testimonial.photo_url} alt={testimonial.client_name} width={48} height={48} className="h-12 w-12 rounded-full object-cover mr-4" />
                 ) : (
                   <div className="h-12 w-12 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-lg mr-4">
                     {testimonial.client_name?.charAt(0) || 'U'}
