@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { LayoutGrid, Briefcase, MessageSquare, FileText, PhoneCall, Menu, X, Users } from 'lucide-react'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 
@@ -42,13 +42,13 @@ export default function Navbar({ variant = 'light' }: { variant?: 'light' | 'dar
           <Link href="/" className="group flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
-              src="/assets/logo.png" 
-              alt="Startup Hub Logo" 
-              className="h-9 w-auto group-hover:scale-110 transition-transform duration-300"
+              src="/favicon.png" 
+              alt="Startup Hub" 
+              className="h-12 w-auto group-hover:scale-110 transition-transform duration-300"
             />
-            <span className="font-extrabold text-xl sm:text-2xl tracking-tighter transition-colors duration-300 flex items-center">
+            <span className="font-gagalin text-xl sm:text-2xl tracking-tight transition-colors duration-300 flex items-center">
               <span className={isDark ? 'text-blue-950' : 'text-white'}>Startup</span>
-              <span className="text-red-600">Hub</span>
+              <span className="text-red-600 ml-1">Hub</span>
             </span>
           </Link>
         </div>

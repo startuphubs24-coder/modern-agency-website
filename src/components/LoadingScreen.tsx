@@ -1,7 +1,6 @@
 "use client"
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sparkles } from 'lucide-react'
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true)
@@ -57,10 +56,10 @@ export default function LoadingScreen() {
             className="relative flex flex-col items-center gap-10"
           >
             {/* Logo Image */}
-            <div className="relative flex items-center justify-center w-48 h-48">
+            <div className="relative flex items-center justify-center w-56 h-56">
               <div className="relative z-10 w-full h-full">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/assets/logo.png" alt="Startup Hub Logo" className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(37,99,235,0.4)]" />
+                <img src="/favicon.png" alt="Startup Hub Logo" className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(37,99,235,0.4)]" />
               </div>
               
               {/* Outer glow rings */}
@@ -85,7 +84,7 @@ export default function LoadingScreen() {
                         duration: 0.5,
                         ease: [0.22, 1, 0.36, 1]
                       }}
-                      className="text-6xl font-extrabold text-[#001D4A] tracking-tighter"
+                      className="text-6xl font-gagalin text-[#001D4A] tracking-tight"
                     >
                       {char}
                     </motion.span>
@@ -104,7 +103,7 @@ export default function LoadingScreen() {
                         stiffness: 260,
                         damping: 15
                       }}
-                      className="text-6xl font-extrabold text-red-600 tracking-tighter"
+                      className="text-6xl font-gagalin text-red-600 tracking-tight"
                     >
                       {char}
                     </motion.span>

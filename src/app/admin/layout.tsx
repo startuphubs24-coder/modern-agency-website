@@ -73,8 +73,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="h-16 flex items-center px-6 border-b border-gray-200">
           <Link href="/" className="flex items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/logo.png" alt="Startup Hub" className="h-8 w-auto" />
-            <span className="font-bold text-lg tracking-tight text-gray-900 ml-1">Admin</span>
+            <img src="/favicon.png" alt="Startup Hub" className="h-10 w-auto" />
+            <span className="font-gagalin text-xl tracking-tight text-gray-900 ml-1">Admin</span>
           </Link>
         </div>
         

@@ -34,8 +34,8 @@ export default function AdminLogin() {
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl border border-gray-100">
         <div className="flex flex-col items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/logo.png" alt="Startup Hub" className="h-12 w-auto mb-2" />
-          <h2 className="text-center text-2xl font-extrabold text-gray-900">
+          <img src="/favicon.png" alt="Startup Hub" className="h-16 w-auto mb-2" />
+          <h2 className="text-center text-3xl font-gagalin text-gray-900 mt-2">
             Admin Dashboard
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">

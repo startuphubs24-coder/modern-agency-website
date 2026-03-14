@@ -10,8 +10,8 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-1">
             <Link href="/" className="group flex items-center gap-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/logo.png" alt="Startup Hub" className="h-9 w-auto" />
-              <span className="font-extrabold text-2xl tracking-tighter text-gray-900">
+              <img src="/favicon.png" alt="Startup Hub" className="h-12 w-auto" />
+              <span className="font-gagalin text-2xl tracking-tight text-gray-900 ml-1">
                 Startup<span className="text-red-600">Hub</span>
               </span>
             </Link>
