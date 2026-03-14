@@ -7,10 +7,10 @@ export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Artificial delay to show the beautiful loading screen
+    // Reduced delay for much faster perceived response
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 2800)
+    }, 1200)
     return () => clearTimeout(timer)
   }, [])
 

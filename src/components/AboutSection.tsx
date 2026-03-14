@@ -1,7 +1,12 @@
 "use client"
 import { motion } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
-import { DotLottieReact } from '@lottiefiles/dotlottie-react'
+import dynamic from 'next/dynamic'
+
+const DotLottieReact = dynamic(
+  () => import('@lottiefiles/dotlottie-react').then((mod) => mod.DotLottieReact),
+  { ssr: false }
+)
 
 export default function AboutSection() {
   return (

@@ -14,21 +14,14 @@ interface Testimonial {
   photo_url?: string
 }
 
-export default function TestimonialsSection() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([])
+export default function TestimonialsSection({ initialTestimonials }: { initialTestimonials: Testimonial[] }) {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(initialTestimonials)
 
   useEffect(() => {
-    async function fetchTestimonials() {
-      try {
-        const { data, error } = await supabase.from('testimonials').select('*').order('created_at', { ascending: false }).limit(6)
-        if (error) throw error
-        if (data) setTestimonials(data)
-      } catch (err: unknown) {
-        console.error("Error fetching testimonials:", (err as Error).message)
-      }
+    if (initialTestimonials.length > 0) {
+      setTestimonials(initialTestimonials)
     }
-    fetchTestimonials()
-  }, [])
+  }, [initialTestimonials])
 
   return (
     <section id="testimonials" className="py-12 bg-gray-50 overflow-hidden">

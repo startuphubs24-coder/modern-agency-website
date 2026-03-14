@@ -6,17 +6,16 @@ import Image from 'next/image'
 import { ExternalLink, ChevronRight, ChevronLeft } from 'lucide-react'
 import { Project } from '@/lib/types'
 
-export default function PortfolioSection() {
-  const [projects, setProjects] = useState<Project[]>([])
+export default function PortfolioSection({ initialProjects }: { initialProjects: Project[] }) {
+  const [projects, setProjects] = useState<Project[]>(initialProjects)
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  // Sync projects if they change (though they shouldn't often in SSR)
   useEffect(() => {
-    async function fetchProjects() {
-      const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false }).limit(6)
-      if (data) setProjects(data)
+    if (initialProjects.length > 0) {
+      setProjects(initialProjects)
     }
-    fetchProjects()
-  }, [])
+  }, [initialProjects])
 
   const nextProject = () => {
     setCurrentIndex((prev) => (prev + 1) % projects.length)
