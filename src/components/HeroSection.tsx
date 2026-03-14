@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { supabase } from '@/lib/supabaseClient'
@@ -28,12 +29,18 @@ export default function HeroSection() {
 
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
-      {/* Dynamic Background Image Layer */}
+      {/* Dynamic Background Image Layer - Optimized with next/image */}
       {bannerUrl && (
-        <div 
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-all duration-700"
-          style={{ backgroundImage: `url(${bannerUrl})` }}
-        />
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none transition-opacity duration-700">
+          <Image 
+            src={bannerUrl}
+            alt="Hero Banner"
+            fill
+            priority
+            className="object-cover object-center"
+            quality={85}
+          />
+        </div>
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -75,9 +82,9 @@ export default function HeroSection() {
         </div>
       </div>
       
-      {/* Abstract Background shapes */}
-      <div className="absolute top-0 right-0 -translate-y-12 translate-x-1/3 opacity-30 transform-gpu blur-3xl" aria-hidden="true">
-        <div className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#2563EB] to-[#93C5FD] opacity-20" style={{ clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)' }}></div>
+      {/* Optimized Abstract Background shapes */}
+      <div className="absolute top-0 right-0 -translate-y-12 translate-x-1/4 opacity-20 transform-gpu blur-2xl pointer-events-none" aria-hidden="true">
+        <div className="aspect-[1155/678] w-[50rem] bg-gradient-to-tr from-[#2563EB] to-[#93C5FD] opacity-20" style={{ clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)' }}></div>
       </div>
     </section>
   )

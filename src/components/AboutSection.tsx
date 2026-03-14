@@ -8,54 +8,29 @@ export default function AboutSection() {
     <section id="about" className="py-12 relative overflow-hidden bg-gradient-to-br from-indigo-50/80 via-white to-pink-50/80">
       {/* 3D Floating Abstract Blobs Background - Soft Pastel Version */}
       
-      {/* Ambient Lighting Gradient */}
-      <div className="absolute inset-0 bg-white/40 backdrop-blur-[60px] pointer-events-none z-0" />
+      {/* Ambient Lighting Gradient - Simplified for performance */}
+      <div className="absolute inset-0 bg-white/60 pointer-events-none z-0" />
 
-      {/* Blob 1: Soft Red */}
+      {/* Optimized Background Blobs - Reduced number and simplified filters */}
+      {/* Blob 1: Soft Indigo - Using transform-gpu for hardware acceleration */}
       <motion.div
         animate={{
-          x: [0, 80, 0],
-          y: [0, 50, 0],
-          rotate: [0, 180, 360],
+          x: [0, 40, 0],
+          y: [0, 30, 0],
         }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[-15%] left-[-10%] w-[45rem] h-[45rem] bg-red-300/50 rounded-full z-0 pointer-events-none blur-[120px]"
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        className="absolute top-[-10%] left-[-5%] w-[35rem] h-[35rem] bg-indigo-200/40 rounded-full z-0 pointer-events-none blur-[100px] transform-gpu"
         style={{ willChange: "transform" }}
       />
 
-      {/* Blob 2: Soft Blue */}
+      {/* Blob 2: Soft Pink */}
       <motion.div
         animate={{
-          x: [0, -60, 0],
-          y: [0, 80, 0],
-          rotate: [360, 180, 0],
+          x: [0, -30, 0],
+          y: [0, 40, 0],
         }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-[-15%] right-[-10%] w-[50rem] h-[50rem] bg-blue-300/50 rounded-full z-0 pointer-events-none blur-[120px]"
-        style={{ willChange: "transform" }}
-      />
-
-      {/* Blob 3: Soft Green */}
-      <motion.div
-        animate={{
-          x: [0, 90, 0],
-          y: [0, -60, 0],
-          scale: [1, 1.15, 1],
-        }}
-        transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[10%] right-[0%] w-[40rem] h-[40rem] bg-green-300/50 rounded-full z-0 pointer-events-none blur-[120px]"
-        style={{ willChange: "transform" }}
-      />
-
-      {/* Blob 4: Soft Yellow */}
-      <motion.div
-        animate={{
-          x: [0, -50, 0],
-          y: [0, -80, 0],
-          scale: [1, 1.25, 1],
-        }}
-        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-[10%] left-[5%] w-[35rem] h-[35rem] bg-yellow-200/60 rounded-full z-0 pointer-events-none blur-[120px]"
+        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+        className="absolute bottom-[-10%] right-[-5%] w-[40rem] h-[40rem] bg-rose-200/40 rounded-full z-0 pointer-events-none blur-[100px] transform-gpu"
         style={{ willChange: "transform" }}
       />
 

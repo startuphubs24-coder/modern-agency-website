@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, ChevronRight, ChevronLeft } from 'lucide-react'
+import Image from 'next/image'
 import { Project } from '@/lib/types'
 
 export default function PortfolioSection() {
@@ -38,7 +39,7 @@ export default function PortfolioSection() {
           <motion.path 
             initial={{ d: "M0,0 L1200,0 L1200,0 C800,0 400,0 0,0 Z" }}
             whileInView={{ d: "M0,0 L1200,0 L1200,60 C800,160 400,-10 0,60 Z" }}
-            viewport={{ once: false, margin: "-50px" }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 1.6, ease: "backOut", delay: 0.1 }}
             fill="rgba(255, 255, 255, 0.4)"
           />
@@ -46,20 +47,19 @@ export default function PortfolioSection() {
           <motion.path 
             initial={{ d: "M0,0 L1200,0 L1200,0 C800,0 400,0 0,0 Z" }}
             whileInView={{ d: "M0,0 L1200,0 L1200,40 C800,120 400,0 0,40 Z" }}
-            viewport={{ once: false, margin: "-50px" }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 1.2, ease: "backOut" }}
             fill="#ffffff"
           />
         </svg>
       </div>
 
-      {/* Soft pastel gradient background base */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-purple-100/80 via-pink-100/80 to-orange-100/80 pointer-events-none" />
+      {/* Simplified background for performance */}
+      <div className="absolute inset-0 z-0 bg-white pointer-events-none" />
       
-      {/* Ambient glowing abstract colors */}
-      <div className="absolute top-0 right-0 w-[50rem] h-[50rem] bg-purple-300/50 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-pink-300/40 rounded-full blur-[90px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[50rem] h-[50rem] bg-orange-300/40 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none" />
+      {/* Optimized ambient glowing abstract colors */}
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-purple-100/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/4 pointer-events-none transform-gpu" />
+      <div className="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-orange-100/50 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/4 pointer-events-none transform-gpu" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12 relative z-10">
@@ -148,11 +148,12 @@ export default function PortfolioSection() {
                     {/* Image Area - Instagram style */}
                     <div className="relative aspect-[4/4] sm:aspect-[4/3] w-full bg-gray-100 overflow-hidden group">
                       {project.image_url ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img 
+                        <Image 
                           src={project.image_url} 
                           alt={project.title} 
-                          className={`w-full h-full object-cover transition-transform duration-700 ${isCenter ? 'group-hover:scale-105' : ''}`}
+                          fill
+                          className={`object-cover transition-transform duration-700 ${isCenter ? 'group-hover:scale-105' : ''}`}
+                          sizes="(max-width: 768px) 100vw, 480px"
                         />
                       ) : (
                         <div className="absolute inset-0 flex items-center justify-center text-gray-400 font-medium">No Image</div>

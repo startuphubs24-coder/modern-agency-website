@@ -2,11 +2,20 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { LayoutGrid, Briefcase, MessageSquare, FileText, PhoneCall, Menu, X, Users } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 
 export default function Navbar({ variant = 'light' }: { variant?: 'light' | 'dark' }) {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { scrollY } = useScroll()
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest > 50 && !scrolled) {
+      setScrolled(true)
+    } else if (latest <= 50 && scrolled) {
+      setScrolled(false)
+    }
+  })
 
   const navItems = [
     { name: 'Services', href: '/#services', icon: LayoutGrid },
@@ -15,14 +24,6 @@ export default function Navbar({ variant = 'light' }: { variant?: 'light' | 'dar
     { name: 'Blog', href: '/blog', icon: FileText },
     { name: 'Careers', href: '/careers', icon: Users },
   ]
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   const isDark = variant === 'dark' || scrolled
 

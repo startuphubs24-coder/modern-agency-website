@@ -64,9 +64,9 @@ export default function ServicesSection() {
   return (
     <section id="services" className="py-12 bg-gray-50 relative overflow-hidden">
       {/* Ambient glowing orbs for glassmorphism effect */}
-      <div className="absolute top-20 -left-10 w-[30rem] h-[30rem] bg-blue-400/20 rounded-full blur-3xl mix-blend-multiply opacity-70 pointer-events-none" />
-      <div className="absolute bottom-10 -right-20 w-[35rem] h-[35rem] bg-indigo-400/20 rounded-full blur-3xl mix-blend-multiply opacity-70 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[20rem] bg-cyan-200/20 rounded-full blur-3xl mix-blend-multiply opacity-50 pointer-events-none" />
+      {/* Optimized ambient glowing orbs for performance */}
+      <div className="absolute top-20 -left-10 w-[20rem] h-[20rem] bg-blue-400/10 rounded-full blur-3xl opacity-70 pointer-events-none transform-gpu" />
+      <div className="absolute bottom-10 -right-20 w-[25rem] h-[25rem] bg-indigo-400/10 rounded-full blur-3xl opacity-70 pointer-events-none transform-gpu" />
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="text-center max-w-3xl mx-auto mb-12">

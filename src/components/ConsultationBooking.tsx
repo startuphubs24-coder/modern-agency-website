@@ -69,23 +69,18 @@ export default function ConsultationBooking() {
   return (
     <section id="contact" className="relative py-32 overflow-hidden bg-gray-50 flex items-center justify-center min-h-[70vh]">
       {/* Light gradient base background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-pink-50" />
+      <div className="absolute inset-0 bg-white" />
 
-      {/* Floating Ambient Spheres */}
+      {/* Optimized Ambient Spheres - Reduced and simplified */}
       <motion.div 
-        animate={{ y: [0, -30, 0], x: [0, 20, 0], scale: [1, 1.1, 1] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-10 left-1/4 w-[25rem] h-[25rem] bg-sky-300/40 rounded-full blur-[100px] pointer-events-none mix-blend-multiply" 
+        animate={{ y: [0, -20, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-10 left-1/4 w-[20rem] h-[20rem] bg-sky-100 rounded-full blur-[80px] pointer-events-none transform-gpu" 
       />
       <motion.div 
-        animate={{ y: [0, 40, 0], x: [0, -30, 0], scale: [1, 1.2, 1] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute bottom-10 right-1/4 w-[30rem] h-[30rem] bg-pink-300/40 rounded-full blur-[120px] pointer-events-none mix-blend-multiply" 
-      />
-      <motion.div 
-        animate={{ y: [0, -20, 0], x: [0, -20, 0], scale: [1, 1.1, 1] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2 w-[20rem] h-[20rem] bg-yellow-300/40 rounded-full blur-[90px] pointer-events-none mix-blend-multiply" 
+        animate={{ y: [0, 20, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute bottom-10 right-1/4 w-[25rem] h-[25rem] bg-rose-100 rounded-full blur-[80px] pointer-events-none transform-gpu" 
       />
 
       <div className="relative z-10 w-full" style={{ perspective: 1500 }}>
