@@ -50,7 +50,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
+    <section className="relative min-h-[90vh] flex items-center pt-20 pb-12 lg:pt-32 lg:pb-20 overflow-hidden bg-white">
       {/* Dynamic Background Image Layer - Optimized with next/image */}
       {bannerUrl && (
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none transition-opacity duration-700">
@@ -72,18 +72,18 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl tracking-wide font-medium drop-shadow-sm sm:text-5xl md:text-6xl lg:text-7xl"
+            className="text-3xl tracking-wide font-medium drop-shadow-sm sm:text-4xl md:text-5xl lg:text-6xl"
             style={{ fontFamily: "'Bitcount Grid Single Ink', sans-serif", color: textColor }}
           >
-            <span className="block">We Help Businesses </span>
-            <span className="block" style={{ color: 'var(--color-primary, #ec4899)' }}>Grow Digitally</span>
+            <span className="block">Stop Losing Customers Online. </span>
+            <span className="block" style={{ color: 'var(--color-primary, #ec4899)' }}>Start Growing Digitally!</span>
           </motion.h1>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-6 text-base sm:text-lg sm:max-w-2xl mx-auto md:text-xl font-medium drop-shadow-md"
+            className="mt-6 text-sm sm:text-base sm:max-w-2xl mx-auto md:text-lg font-medium drop-shadow-md"
             style={{ fontFamily: "'Tektur', sans-serif", color: textColor }}
           >
             Websites, marketing, automation, and analytics — everything you need to scale online. Join the companies that trust us for growth.
