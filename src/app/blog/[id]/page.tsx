@@ -20,15 +20,27 @@ export default function BlogPostPage() {
     async function fetchBlog() {
       if (!id) return
       setLoading(true)
-      const { data, error } = await supabase.from('blogs').select('*').eq('id', id).single()
-      
-      if (error || !data) {
-        console.error("Error fetching blog", error)
-        // Optionally handle 404 here
-      } else {
-        setBlog(data)
+      try {
+        const { data, error } = await supabase
+          .from('blogs')
+          .select('*')
+          .eq('id', id)
+          .single()
+        
+        if (error) {
+          console.error("Error fetching blog:", error.message || error)
+          setBlog(null)
+        } else if (!data) {
+          setBlog(null)
+        } else {
+          setBlog(data)
+        }
+      } catch (err) {
+        console.error("Unexpected error fetching blog:", err)
+        setBlog(null)
+      } finally {
+        setLoading(false)
       }
-      setLoading(false)
     }
     fetchBlog()
   }, [id])
@@ -87,13 +99,6 @@ export default function BlogPostPage() {
                 <div className="flex items-center justify-center text-sm text-gray-500 mb-4">
                   <CalendarDays className="w-4 h-4 mr-2" />
                   {format(new Date(blog.created_at || new Date()), 'MMMM d, yyyy')}
-                  
-                  {blog.tags && blog.tags.length > 0 && (
-                     <>
-                       <span className="mx-3 text-gray-300">•</span>
-                       <span className="text-primary font-medium">{blog.tags[0]}</span>
-                     </>
-                  )}
                 </div>
                 
                 <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-8">
@@ -110,22 +115,9 @@ export default function BlogPostPage() {
 
               {/* Render HTML Content */}
               <div 
-                className="prose prose-lg prose-blue max-w-none text-gray-600 prose-headings:text-gray-900 prose-a:text-primary hover:prose-a:text-primary-hover prose-img:rounded-2xl"
+                className="prose prose-lg prose-blue max-w-none text-gray-600 prose-headings:text-gray-900 prose-a:text-primary hover:prose-a:text-primary-hover prose-img:rounded-2xl whitespace-pre-wrap"
                 dangerouslySetInnerHTML={{ __html: blog.content }}
               />
-
-              {blog.tags && blog.tags.length > 0 && (
-                <div className="mt-12 pt-8 border-t border-gray-100">
-                  <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Tags</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {blog.tags.map((tag: string, i: number) => (
-                      <span key={i} className="px-3 py-1 bg-gray-50 text-gray-600 text-sm font-medium rounded-full border border-gray-100">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
             </article>
           )}
           

@@ -8,7 +8,7 @@ export default function ManageBlog() {
   const [blogs, setBlogs] = useState<Blog[]>([])
   const [loading, setLoading] = useState(true)
   const [isAdding, setIsAdding] = useState(false)
-  const [newBlog, setNewBlog] = useState({ title: '', content: '', thumbnail: '', tags: '', published: true })
+  const [newBlog, setNewBlog] = useState({ title: '', content: '', thumbnail: '', published: true })
   const [uploading, setUploading] = useState(false)
 
   const fetchBlogs = async () => {
@@ -54,10 +54,10 @@ export default function ManageBlog() {
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
-    const { error } = await supabase.from('blogs').insert([{ ...newBlog, tags: newBlog.tags.split(',').map(t=>t.trim()) }])
+    const { error } = await supabase.from('blogs').insert([newBlog])
     if (!error) {
       setIsAdding(false)
-      setNewBlog({ title: '', content: '', thumbnail: '', tags: '', published: true })
+      setNewBlog({ title: '', content: '', thumbnail: '', published: true })
       fetchBlogs()
     }
   }
@@ -83,7 +83,6 @@ export default function ManageBlog() {
           <h3 className="text-lg font-semibold border-b pb-2">Create New Post</h3>
           <div className="grid grid-cols-1 gap-4">
             <input required placeholder="Post Title" className="border p-2 rounded w-full" value={newBlog.title} onChange={e => setNewBlog({...newBlog, title: e.target.value})} />
-            <input placeholder="Tags (comma separated)" className="border p-2 rounded w-full" value={newBlog.tags} onChange={e => setNewBlog({...newBlog, tags: e.target.value})} />
             
             <div className="border p-3 rounded bg-gray-50 flex flex-col gap-2">
               <label className="text-sm font-medium text-gray-700">Thumbnail Image (Upload or URL)</label>

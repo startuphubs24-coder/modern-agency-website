@@ -68,7 +68,7 @@ export interface Blog {
   title: string;
   content: string;
   thumbnail?: string;
-  tags: string[];
+  tags?: string[];
   published: boolean;
   created_at: string;
 }
