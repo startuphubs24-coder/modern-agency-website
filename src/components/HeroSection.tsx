@@ -73,7 +73,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="text-2xl tracking-wide font-medium drop-shadow-sm sm:text-4xl md:text-5xl lg:text-6xl"
-            style={{ fontFamily: "'Bitcount Grid Single Ink', sans-serif", color: textColor }}
+            style={{ fontFamily: "'Orbitron', sans-serif", color: textColor }}
           >
             <span className="block mb-1">Stop Losing Customers Online. </span>
             <span className="block" style={{ color: 'var(--color-primary, #ec4899)' }}>Start Growing Digitally!</span>
