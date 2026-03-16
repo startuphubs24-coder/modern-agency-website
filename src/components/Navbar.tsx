@@ -32,10 +32,10 @@ export default function Navbar({ variant = 'light' }: { variant?: 'light' | 'dar
       
       {/* Navbar Container */}
       <nav 
-        className={`pointer-events-auto w-full max-w-7xl flex items-center justify-between transition-all duration-500 px-6 sm:px-10 py-3 ${
+        className={`pointer-events-auto w-full max-w-7xl flex items-center justify-between transition-all duration-500 px-4 sm:px-10 py-2.5 sm:py-3 ${
           scrolled 
             ? 'bg-white/80 backdrop-blur-2xl border-b border-gray-200/50 shadow-[0_4px_30px_rgba(0,0,0,0.03)] rounded-none max-w-none' 
-            : 'bg-white/10 backdrop-blur-md border border-white/20 shadow-lg rounded-full mx-4 sm:mx-6 lg:mx-8'
+            : 'bg-white/10 backdrop-blur-md border border-white/20 shadow-lg rounded-full mx-2 sm:mx-6 lg:mx-8'
         }`}
       >
         <div className="flex-shrink-0 flex items-center">
@@ -106,7 +106,7 @@ export default function Navbar({ variant = 'light' }: { variant?: 'light' | 'dar
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-            className={`absolute left-4 right-4 sm:left-auto sm:right-6 sm:w-[350px] lg:hidden pointer-events-auto bg-white/90 backdrop-blur-3xl border border-gray-200 shadow-2xl rounded-[2rem] overflow-hidden p-3 transition-all duration-500 ${scrolled ? 'top-16' : 'top-24'}`}
+            className={`absolute left-3 right-3 sm:left-auto sm:right-6 sm:w-[350px] lg:hidden pointer-events-auto bg-white/95 backdrop-blur-3xl border border-gray-200 shadow-2xl rounded-[2rem] overflow-hidden p-3 transition-all duration-500 ${scrolled ? 'top-[4.5rem]' : 'top-20'}`}
           >
             <div className="flex flex-col gap-1">
               {navItems.map((item) => (

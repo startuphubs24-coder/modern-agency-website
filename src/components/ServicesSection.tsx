@@ -136,7 +136,7 @@ export default function ServicesSection() {
                animate={{ opacity: 1, scale: 1, rotateY: 0, rotateX: 0, y: 0 }}
                exit={{ opacity: 0, scale: 0.8, rotateY: 15, rotateX: -10, y: 40 }}
                transition={{ type: "spring", damping: 25, stiffness: 300 }}
-               className="relative w-full max-w-5xl bg-white/60 backdrop-blur-2xl shadow-[0_30px_80px_-15px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.8)] border border-white/80 rounded-[2.5rem] overflow-hidden flex flex-col"
+               className="relative w-full max-w-5xl max-h-[90vh] bg-white/60 backdrop-blur-2xl shadow-[0_30px_80px_-15px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.8)] border border-white/80 rounded-[2.5rem] overflow-hidden flex flex-col"
             >
               {/* Decorative Glowing Elements inside the modal window */}
               <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
@@ -145,14 +145,14 @@ export default function ServicesSection() {
               {/* Header */}
               <div className="px-6 py-8 sm:px-10 relative shrink-0 border-b border-white/30">
                 <div className="relative z-10 flex justify-between items-start">
-                  <div className="pr-12">
+                  <div className="pr-10 sm:pr-12">
                     <h3 
-                      className="text-4xl sm:text-5xl font-medium mb-4 tracking-wide text-blue-900 drop-shadow-sm"
+                      className="text-3xl sm:text-5xl font-medium mb-3 sm:mb-4 tracking-wide text-blue-900 drop-shadow-sm"
                       style={{ fontFamily: "'Bitcount Grid Single Ink', sans-serif" }}
                     >
                       {serviceCategories[selectedCategory].title}
                     </h3>
-                    <p className="text-gray-600 text-lg font-medium max-w-2xl">
+                    <p className="text-gray-600 text-sm sm:text-lg font-medium max-w-2xl">
                       {serviceCategories[selectedCategory].description}
                     </p>
                   </div>
@@ -165,8 +165,8 @@ export default function ServicesSection() {
                 </div>
               </div>
 
-              {/* Grid of Services */}
-              <div className="p-6 sm:p-10 w-full relative z-10">
+              {/* Grid of Services - Scrollable on small screens */}
+              <div className="p-5 sm:p-10 w-full relative z-10 overflow-y-auto custom-scrollbar">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {serviceCategories[selectedCategory].services.map((service, idx) => (
                     <motion.div

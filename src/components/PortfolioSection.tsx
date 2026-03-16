@@ -10,12 +10,22 @@ export default function PortfolioSection() {
   const [projects, setProjects] = useState<Project[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  const [isMobile, setIsMobile] = useState(false)
+
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    
     async function fetchProjects() {
       const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false }).limit(6)
       if (data) setProjects(data)
     }
     fetchProjects()
+    
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   const nextProject = () => {
@@ -73,7 +83,7 @@ export default function PortfolioSection() {
         </div>
 
         {projects.length > 0 ? (
-          <div className="relative h-[650px] w-full flex items-center justify-center">
+          <div className={`relative ${isMobile ? 'h-[500px]' : 'h-[650px]'} w-full flex items-center justify-center`}>
             
             {/* Controls */}
             {projects.length > 1 && (
@@ -110,11 +120,11 @@ export default function PortfolioSection() {
 
                 // Setup the animation styles
                 const zIndex = isCenter ? 40 : 10 - offset
-                const rotate = isCenter ? 0 : offset === 1 ? 6 : -6
+                const rotate = isCenter ? 0 : offset === 1 ? (isMobile ? 3 : 6) : (isMobile ? -3 : -6)
                 const scale = isCenter ? 1 : 0.9
-                const x = isCenter ? 0 : offset === 1 ? 120 : -120
-                const y = isCenter ? 0 : 40
-                const opacity = isCenter ? 1 : 0.6
+                const x = isCenter ? 0 : offset === 1 ? (isMobile ? 40 : 120) : (isMobile ? -40 : -120)
+                const y = isCenter ? 0 : (isMobile ? 20 : 40)
+                const opacity = isCenter ? 1 : (isMobile ? 0.3 : 0.6)
 
                 return (
                   <motion.div
@@ -136,7 +146,7 @@ export default function PortfolioSection() {
                       damping: 25,
                       mass: 0.8
                     }}
-                    className={`absolute w-full max-w-[420px] sm:max-w-[480px] bg-white rounded-3xl shadow-2xl border border-gray-100/50 overflow-hidden ${isCenter ? 'cursor-default' : 'cursor-pointer'}`}
+                    className={`absolute w-[90%] sm:w-full max-w-[420px] sm:max-w-[480px] bg-white rounded-3xl shadow-2xl border border-gray-100/50 overflow-hidden ${isCenter ? 'cursor-default' : 'cursor-pointer'}`}
                     onClick={() => {
                       if (!isCenter) {
                          if (offset === 1) nextProject()
@@ -170,9 +180,9 @@ export default function PortfolioSection() {
                     </div>
 
                     {/* Content Area */}
-                    <div className="p-8">
-                      <h3 className="text-2xl font-black text-gray-900 mb-3 tracking-tight">{project.title}</h3>
-                      <p className="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-2">{project.description}</p>
+                    <div className="p-6 sm:p-8">
+                      <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-2 sm:mb-3 tracking-tight">{project.title}</h3>
+                      <p className="text-gray-500 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 line-clamp-2">{project.description}</p>
                       
                       <a 
                         href={project.project_url || "#"} 

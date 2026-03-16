@@ -50,7 +50,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-20 pb-12 lg:pt-32 lg:pb-20 overflow-hidden bg-white">
+    <section className="relative min-h-[85vh] flex items-center pt-24 pb-12 lg:pt-32 lg:pb-20 overflow-hidden bg-white">
       {/* Dynamic Background Image Layer - Optimized with next/image */}
       {bannerUrl && (
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none transition-opacity duration-700">
@@ -67,15 +67,15 @@ export default function HeroSection() {
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto text-center z-20 py-16">
+        <div className="max-w-4xl mx-auto text-center z-20 py-8 sm:py-16">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-3xl tracking-wide font-medium drop-shadow-sm sm:text-4xl md:text-5xl lg:text-6xl"
+            className="text-2xl tracking-wide font-medium drop-shadow-sm sm:text-4xl md:text-5xl lg:text-6xl"
             style={{ fontFamily: "'Bitcount Grid Single Ink', sans-serif", color: textColor }}
           >
-            <span className="block">Stop Losing Customers Online. </span>
+            <span className="block mb-1">Stop Losing Customers Online. </span>
             <span className="block" style={{ color: 'var(--color-primary, #ec4899)' }}>Start Growing Digitally!</span>
           </motion.h1>
           

@@ -173,24 +173,24 @@ export default function ConsultationBooking() {
               animate={{ x: 0, scale: 1, rotateY: 0, opacity: 1 }}
               exit={{ x: "50vw", scale: 0.8, rotateY: 30, opacity: 0 }}
               transition={{ type: "spring", stiffness: 180, damping: 20, mass: 1 }}
-              className="relative w-full max-w-2xl my-4 sm:my-8 rounded-[2rem] bg-white/60 backdrop-blur-2xl border border-white/80 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.8)] p-6 sm:p-8 overflow-visible origin-center"
+              className="relative w-full max-w-2xl max-h-[90vh] my-4 sm:my-8 rounded-[2rem] bg-white/60 backdrop-blur-2xl border border-white/80 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.8)] flex flex-col overflow-hidden origin-center"
             >
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-6 right-6 p-2 rounded-full bg-white/50 hover:bg-white/80 transition-colors text-gray-600 hover:text-gray-900 z-20"
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full bg-white/50 hover:bg-white/80 transition-colors text-gray-600 hover:text-gray-900 z-30"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
 
               <div className="absolute top-0 inset-x-0 h-px w-1/2 mx-auto bg-gradient-to-r from-transparent via-white to-transparent blur-[1px]" />
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/60 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
-              <div className="relative z-10">
+              <div className="relative z-10 p-6 sm:p-8 overflow-y-auto custom-scrollbar">
                 <h3 
-                  className="text-3xl md:text-4xl font-medium text-blue-900 mb-6 text-center pt-2 tracking-wide drop-shadow-sm pb-1"
+                  className="text-2xl sm:text-4xl font-medium text-blue-900 mb-4 sm:mb-6 text-center pt-2 tracking-wide drop-shadow-sm pb-1"
                   style={{ fontFamily: "'Bitcount Grid Single Ink', sans-serif" }}
                 >
-                  Schedule Your Strategy Session
+                  Schedule Your Session
                 </h3>
                 
                 {isSuccess && (
