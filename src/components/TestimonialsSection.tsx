@@ -42,7 +42,7 @@ export default function TestimonialsSection() {
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-8">
+        <div className="flex flex-wrap justify-center gap-6">
           {testimonials.length > 0 ? testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
@@ -50,14 +50,14 @@ export default function TestimonialsSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm max-w-md w-full"
+              className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm max-w-sm w-full"
             >
-              <div className="flex text-yellow-400 mb-6">
+              <div className="flex text-yellow-400 mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={`w-5 h-5 ${i < testimonial.rating ? 'fill-current' : 'text-gray-300'}`} />
+                  <Star key={i} className={`w-4 h-4 ${i < testimonial.rating ? 'fill-current' : 'text-gray-300'}`} />
                 ))}
               </div>
-              <p className="text-gray-600 text-lg mb-8 italic">&quot;{testimonial.review}&quot;</p>
+              <p className="text-gray-600 text-base mb-6 italic">&quot;{testimonial.review}&quot;</p>
               
               <div className="flex items-center">
                 {testimonial.photo_url ? (
