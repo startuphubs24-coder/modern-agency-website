@@ -83,54 +83,52 @@ export default function PortfolioSection() {
         </div>
 
         {projects.length > 0 ? (
-          <div className={`relative ${isMobile ? 'h-[500px]' : 'h-[650px]'} w-full flex items-center justify-center`}>
+          <div className={`relative ${isMobile ? 'h-[580px]' : 'h-[650px]'} w-full flex items-center justify-center`}>
             
             {/* Controls */}
             {projects.length > 1 && (
-              <div className="absolute top-1/2 -mt-6 w-full flex justify-between px-4 sm:px-12 z-50 pointer-events-none">
+              <div className="absolute top-1/2 -mt-6 w-full flex justify-between px-2 sm:px-12 z-50 pointer-events-none">
                 <button 
                   onClick={prevProject} 
-                  className="w-14 h-14 bg-white/80 backdrop-blur-md shadow-xl rounded-full flex items-center justify-center text-gray-800 hover:bg-white hover:text-primary transition-all pointer-events-auto border border-gray-100 transform hover:scale-110"
+                  className="w-12 h-12 md:w-14 md:h-14 bg-white/90 backdrop-blur-md shadow-xl rounded-full flex items-center justify-center text-gray-800 hover:bg-white hover:text-primary transition-all pointer-events-auto border border-gray-100 transform active:scale-95"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
                 <button 
                   onClick={nextProject} 
-                  className="w-14 h-14 bg-white/80 backdrop-blur-md shadow-xl rounded-full flex items-center justify-center text-gray-800 hover:bg-white hover:text-primary transition-all pointer-events-auto border border-gray-100 transform hover:scale-110"
+                  className="w-12 h-12 md:w-14 md:h-14 bg-white/90 backdrop-blur-md shadow-xl rounded-full flex items-center justify-center text-gray-800 hover:bg-white hover:text-primary transition-all pointer-events-auto border border-gray-100 transform active:scale-95"
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
               </div>
             )}
 
-            <AnimatePresence mode="popLayout">
+            <AnimatePresence mode="popLayout" initial={false}>
               {projects.map((project, index) => {
                 
-                // Calculate position relative to current index
+                // Better offset logic for circular transitions
                 let offset = index - currentIndex
-                if (offset < 0) offset += projects.length
+                if (offset > projects.length / 2) offset -= projects.length
+                if (offset < -projects.length / 2) offset += projects.length
 
                 // Center card
                 const isCenter = offset === 0
-                // Background cards (fan deck effect)
-                const isRight = offset === 1 || offset === projects.length - 1
-                const isFar = !isCenter && !isRight
+                const isVisible = Math.abs(offset) <= 1
 
-                if (isFar && projects.length > 3) return null // Hide far cards if there are many
+                if (!isVisible) return null 
 
                 // Setup the animation styles
-                const zIndex = isCenter ? 40 : 10 - offset
-                const rotate = isCenter ? 0 : offset === 1 ? (isMobile ? 3 : 6) : (isMobile ? -3 : -6)
-                const scale = isCenter ? 1 : 0.9
-                const x = isCenter ? 0 : offset === 1 ? (isMobile ? 40 : 120) : (isMobile ? -40 : -120)
-                const y = isCenter ? 0 : (isMobile ? 20 : 40)
-                const opacity = isCenter ? 1 : (isMobile ? 0.3 : 0.6)
+                const zIndex = isCenter ? 40 : 10 - Math.abs(offset)
+                const rotate = offset * (isMobile ? 3 : 8)
+                const scale = isCenter ? 1 : 0.85
+                const x = offset * (isMobile ? 60 : 150)
+                const y = isCenter ? 0 : (isMobile ? 15 : 40)
+                const opacity = isCenter ? 1 : (isMobile ? 0.4 : 0.6)
 
                 return (
                   <motion.div
                     key={project.id}
-                    layout
-                    initial={{ opacity: 0 }}
+                    initial={{ opacity: 0, scale: 0.8, x: offset * 100 }}
                     animate={{
                       zIndex,
                       rotate,
@@ -139,12 +137,12 @@ export default function PortfolioSection() {
                       y,
                       opacity
                     }}
-                    exit={{ opacity: 0, scale: 0.8 }}
+                    exit={{ opacity: 0, scale: 0.8, x: -offset * 100 }}
                     transition={{
                       type: "spring",
-                      stiffness: 200,
+                      stiffness: 260,
                       damping: 25,
-                      mass: 0.8
+                      mass: 1
                     }}
                     className={`absolute w-[90%] sm:w-full max-w-[420px] sm:max-w-[480px] bg-white rounded-3xl shadow-2xl border border-gray-100/50 overflow-hidden ${isCenter ? 'cursor-default' : 'cursor-pointer'}`}
                     onClick={() => {
