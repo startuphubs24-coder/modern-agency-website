@@ -9,6 +9,8 @@ import { supabase } from '@/lib/supabaseClient'
 export default function HeroSection() {
   const [bannerUrl, setBannerUrl] = useState<string | null>(null)
   const [textColor, setTextColor] = useState<string>('#1e3a8a')
+  const [secondaryColor, setSecondaryColor] = useState<string>('#ec4899')
+  const [accentColor, setAccentColor] = useState<string>('#1e3a8a')
 
   useEffect(() => {
     const fetchActiveBanner = async () => {
@@ -16,7 +18,7 @@ export default function HeroSection() {
         // First try to get the active banner
         const { data, error } = await supabase
           .from('hero_banners')
-          .select('image_url, text_color')
+          .select('image_url, text_color, secondary_text_color, accent_text_color')
           .eq('is_active', true)
           .maybeSingle()
         
@@ -27,11 +29,13 @@ export default function HeroSection() {
         if (data && data.image_url) {
           setBannerUrl(data.image_url)
           if (data.text_color) setTextColor(data.text_color)
+          if (data.secondary_text_color) setSecondaryColor(data.secondary_text_color)
+          if (data.accent_text_color) setAccentColor(data.accent_text_color)
         } else {
           // Fallback: If no active banner, get the most recent one
           const { data: recentData } = await supabase
             .from('hero_banners')
-            .select('image_url, text_color')
+            .select('image_url, text_color, secondary_text_color, accent_text_color')
             .order('created_at', { ascending: false })
             .limit(1)
             .maybeSingle()
@@ -39,6 +43,8 @@ export default function HeroSection() {
           if (recentData && recentData.image_url) {
             setBannerUrl(recentData.image_url)
             if (recentData.text_color) setTextColor(recentData.text_color)
+            if (recentData.secondary_text_color) setSecondaryColor(recentData.secondary_text_color)
+            if (recentData.accent_text_color) setAccentColor(recentData.accent_text_color)
           }
         }
       } catch (err) {
@@ -76,7 +82,7 @@ export default function HeroSection() {
             style={{ fontFamily: "'Orbitron', sans-serif", color: textColor }}
           >
             <span className="block mb-1">Stop Losing Customers Online. </span>
-            <span className="block" style={{ color: 'var(--color-primary, #ec4899)' }}>Start Growing Digitally!</span>
+            <span className="block" style={{ color: secondaryColor }}>Start Growing Digitally!</span>
           </motion.h1>
           
           <motion.p 
@@ -84,7 +90,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-6 text-sm sm:text-base sm:max-w-2xl mx-auto md:text-lg font-medium drop-shadow-md"
-            style={{ fontFamily: "'Tektur', sans-serif", color: textColor }}
+            style={{ fontFamily: "'Tektur', sans-serif", color: accentColor }}
           >
             Websites, marketing, automation, and analytics — everything you need to scale online. Join the companies that trust us for growth.
           </motion.p>

@@ -99,6 +99,8 @@ CREATE TABLE IF NOT EXISTS public.hero_banners (
   image_url text NOT NULL,
   is_active boolean DEFAULT false,
   text_color text DEFAULT '#1e3a8a',
+  secondary_text_color text DEFAULT '#ec4899',
+  accent_text_color text DEFAULT '#1e3a8a',
   created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 

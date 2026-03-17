@@ -43,7 +43,9 @@ export default function ManageHero() {
         const { error: insertError } = await supabase.from('hero_banners').insert([{ 
           image_url: data.publicUrl, 
           is_active: banners.length === 0, 
-          text_color: '#1e3a8a' 
+          text_color: '#1e3a8a',
+          secondary_text_color: '#ec4899',
+          accent_text_color: '#1e3a8a'
         }])
         
         if (insertError) throw insertError
@@ -112,13 +114,13 @@ export default function ManageHero() {
     }
   }
 
-  const handleColorChange = (id: string, color: string) => {
-    setBanners(banners.map(b => b.id === id ? { ...b, text_color: color } : b))
+  const handleColorChange = (id: string, color: string, field: 'text_color' | 'secondary_text_color' | 'accent_text_color') => {
+    setBanners(banners.map(b => b.id === id ? { ...b, [field]: color } : b))
   }
 
-  const saveColor = async (id: string, color: string) => {
+  const saveColor = async (id: string, color: string, field: 'text_color' | 'secondary_text_color' | 'accent_text_color') => {
     try {
-      const { error } = await supabase.from('hero_banners').update({ text_color: color }).eq('id', id)
+      const { error } = await supabase.from('hero_banners').update({ [field]: color }).eq('id', id)
       if (error) throw error
     } catch (err: unknown) {
       alert("Error saving color: " + (err as Error).message)
@@ -194,15 +196,51 @@ export default function ManageHero() {
                    </div>
                  )}
 
-                 <div className="flex items-center justify-between border-t border-gray-200 pt-3 mt-1">
-                   <label className="text-sm text-gray-700 font-medium">Text Color</label>
-                   <input 
-                     type="color" 
-                     value={banner.text_color || '#1e3a8a'} 
-                     onChange={(e) => handleColorChange(banner.id, e.target.value)}
-                     onBlur={(e) => saveColor(banner.id, e.target.value)}
-                     className="w-8 h-8 rounded cursor-pointer border-0 p-0"
-                   />
+                 <div className="space-y-3 border-t border-gray-200 pt-3 mt-1">
+                   {/* Color 1: Primary Heading */}
+                   <div className="flex items-center justify-between">
+                     <div className="flex flex-col">
+                       <label className="text-xs text-gray-700 font-bold uppercase tracking-wider">Primary Text</label>
+                       <span className="text-[10px] text-gray-400">Heading Line 1</span>
+                     </div>
+                     <input 
+                       type="color" 
+                       value={banner.text_color || '#1e3a8a'} 
+                       onChange={(e) => handleColorChange(banner.id, e.target.value, 'text_color')}
+                       onBlur={(e) => saveColor(banner.id, e.target.value, 'text_color')}
+                       className="w-8 h-8 rounded-lg cursor-pointer border shadow-sm p-0 overflow-hidden"
+                     />
+                   </div>
+
+                   {/* Color 2: Secondary Heading */}
+                   <div className="flex items-center justify-between">
+                     <div className="flex flex-col">
+                       <label className="text-xs text-gray-700 font-bold uppercase tracking-wider">Secondary Text</label>
+                       <span className="text-[10px] text-gray-400">Heading Line 2</span>
+                     </div>
+                     <input 
+                       type="color" 
+                       value={banner.secondary_text_color || '#ec4899'} 
+                       onChange={(e) => handleColorChange(banner.id, e.target.value, 'secondary_text_color')}
+                       onBlur={(e) => saveColor(banner.id, e.target.value, 'secondary_text_color')}
+                       className="w-8 h-8 rounded-lg cursor-pointer border shadow-sm p-0 overflow-hidden"
+                     />
+                   </div>
+
+                   {/* Color 3: Accent/Paragraph */}
+                   <div className="flex items-center justify-between">
+                     <div className="flex flex-col">
+                       <label className="text-xs text-gray-700 font-bold uppercase tracking-wider">Accent Text</label>
+                       <span className="text-[10px] text-gray-400">Paragraph/Subtitle</span>
+                     </div>
+                     <input 
+                       type="color" 
+                       value={banner.accent_text_color || '#1e3a8a'} 
+                       onChange={(e) => handleColorChange(banner.id, e.target.value, 'accent_text_color')}
+                       onBlur={(e) => saveColor(banner.id, e.target.value, 'accent_text_color')}
+                       className="w-8 h-8 rounded-lg cursor-pointer border shadow-sm p-0 overflow-hidden"
+                     />
+                   </div>
                  </div>
 
                  <button 

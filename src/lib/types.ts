@@ -60,6 +60,8 @@ export interface HeroBanner {
   image_url: string;
   is_active: boolean;
   text_color?: string;
+  secondary_text_color?: string;
+  accent_text_color?: string;
   created_at: string;
 }
 
