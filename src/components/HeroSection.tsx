@@ -15,36 +15,56 @@ export default function HeroSection() {
   useEffect(() => {
     const fetchActiveBanner = async () => {
       try {
-        // First try to get the active banner
-        const { data, error } = await supabase
+        // Attempt to fetch with all color columns
+        const { data: fullData, error: fullError } = await supabase
           .from('hero_banners')
           .select('image_url, text_color, secondary_text_color, accent_text_color')
           .eq('is_active', true)
           .maybeSingle()
         
-        if (error) {
-          console.error('Error fetching active banner:', error)
+        let finalData = fullData
+        
+        // If columns don't exist yet, fallback to basic selection
+        if (fullError && fullError.message.includes('column')) {
+          const { data: fallbackData } = await supabase
+            .from('hero_banners')
+            .select('image_url, text_color')
+            .eq('is_active', true)
+            .maybeSingle()
+          finalData = fallbackData as any
         }
 
-        if (data && data.image_url) {
-          setBannerUrl(data.image_url)
-          if (data.text_color) setTextColor(data.text_color)
-          if (data.secondary_text_color) setSecondaryColor(data.secondary_text_color)
-          if (data.accent_text_color) setAccentColor(data.accent_text_color)
+        if (finalData && finalData.image_url) {
+          setBannerUrl(finalData.image_url)
+          if (finalData.text_color) setTextColor(finalData.text_color)
+          if (finalData.secondary_text_color) setSecondaryColor(finalData.secondary_text_color)
+          if (finalData.accent_text_color) setAccentColor(finalData.accent_text_color)
         } else {
           // Fallback: If no active banner, get the most recent one
-          const { data: recentData } = await supabase
+          const { data: recentFull, error: recentError } = await supabase
             .from('hero_banners')
             .select('image_url, text_color, secondary_text_color, accent_text_color')
             .order('created_at', { ascending: false })
             .limit(1)
             .maybeSingle()
           
-          if (recentData && recentData.image_url) {
-            setBannerUrl(recentData.image_url)
-            if (recentData.text_color) setTextColor(recentData.text_color)
-            if (recentData.secondary_text_color) setSecondaryColor(recentData.secondary_text_color)
-            if (recentData.accent_text_color) setAccentColor(recentData.accent_text_color)
+          let recentFinal = recentFull
+          
+          if (recentError && recentError.message.includes('column')) {
+            const { data: recentFallback } = await supabase
+              .from('hero_banners')
+              .select('image_url, text_color')
+              .order('created_at', { ascending: false })
+              .limit(1)
+              .maybeSingle()
+            recentFinal = recentFallback as any
+          }
+          
+          if (recentFinal && recentFinal.image_url) {
+            setBannerUrl(recentFinal.image_url)
+            if (recentFinal.text_color) setTextColor(recentFinal.text_color)
+            if (recentFinal.secondary_text_color) setSecondaryColor(recentFinal.secondary_text_color)
+            if (recentFinal.accent_text_color) setAccentColor(recentFinal.accent_text_color)
           }
         }
       } catch (err) {
